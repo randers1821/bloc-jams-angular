@@ -11,6 +11,18 @@
 
       var currentBuzzObject = null;
 
+      /**
+      * @function playSong
+      * @desc Plays currently playing song and loads new audio file as currentBuzzObject
+      * @param {Object} song
+      */
+
+              var playSong = function(song) {
+                currentBuzzObject.play();
+                SongPlayer.currentSong.playing = true;
+              }
+
+
 /**
 * @function setSong
 * @desc Stops currently playing song and loads new audio file as currentBuzzObject
@@ -19,8 +31,7 @@
 
       var setSong = function(song) {
         if (currentBuzzObject) {
-          currentBuzzObject.stop();
-          SongPlayer.currentSong.playing = null;
+          stopSong();
         }
 
         currentBuzzObject = new buzz.sound(song.audioUrl, {
@@ -31,6 +42,8 @@
         SongPlayer.currentSong = song;
 
       };
+
+
 
 /**
 * @function getSongIndex
@@ -94,8 +107,7 @@
         currentSongIndex--;
 
         if (currentSongIndex < 0) {
-          currentBuzzObject.stop();
-          SongPlayer.currentSong.playing = null;
+          stopSong();
         } else {
           var song = currentAlbum.songs[currentSongIndex];
           setSong(song);
@@ -103,17 +115,31 @@
         }
       };
 
-
 /**
-* @function playSong
-* @desc Plays currently playing song and loads new audio file as currentBuzzObject
-* @param {Object} song
+* @function next
+* @desc play next song
+* @type {Object}
 */
 
-        var playSong = function(song) {
-          currentBuzzObject.play();
-          song.playing = true;
+      SongPlayer.next = function() {
+        var currentSongIndex = getSongIndex(SongPlayer.currentSong);
+        currentSongIndex++;
+
+        if (currentSongIndex > 0) {
+          stopSong();
+        } else {
+          var song = currentAlbum.songs[currentSongIndex];
+          setSong(song);
+          playSong(song);
         }
+      };
+
+      var stopSong = function() {
+        currentBuzzObject.stop();
+        SongPlayer.currentSong.playing = null;
+      }
+
+
 
 
         return SongPlayer;
