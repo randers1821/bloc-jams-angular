@@ -36,8 +36,7 @@
         if (currentSong !== song) {
           setSong(song);
 
-          currentBuzzObject.play();
-          song.playing = true;
+          playSong();
 
         } else if (currentSong === song) {
             if (currentBuzzObject.isPaused()) {
@@ -52,9 +51,23 @@
         song.playing = false;
       };
 
-      return SongPlayer;
+/**
+* @function playSong
+* @desc Plays currently playing song and loads new audio file as currentBuzzObject
+* @param {Object} song
+*/
+
+        var playSong = function(song) {
+          currentBuzzObject.play();
+          song.playing = true;
+        }
+
+
+        return SongPlayer;
 
       };
+
+
 
 angular
   .module('blocJams')
