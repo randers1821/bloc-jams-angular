@@ -32,7 +32,7 @@
             scope.max = newValue;
           });
 
-          var percentString = function() {
+        var percentString = function() {
           var value = scope.value;
           var max = scope.max;
           var percent = value / max * 100;
@@ -44,7 +44,7 @@
         };
 
         scope.thumbStyle = function() {
-          return scope.value;
+          return {left: percentString()};
         };
 
         scope.onClickSeekBar = function(event) {
@@ -72,7 +72,7 @@
             if (typeof scope.onChange === 'function') {
               scope.onChange({value: newValue});
             }
-          };
+        };
       }
     };
   }

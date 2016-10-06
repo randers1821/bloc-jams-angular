@@ -28,9 +28,9 @@
                  <div class="total-time">{{ playerBar.songPlayer.currentSong.duration | timecode }}</div>
              </div>
          </div>
-         <div class="control-group volume" value="{{ songPlayer.volume }}" max="{{ songPlayer.volume(volume) }}">
+         <div class="control-group volume" >
              <span class="icon ion-volume-high"></span>
-             <seek-bar ></seek-bar>
+             <seek-bar value="{{ playerBar.songPlayer.currentVolume }}" max="100" on-change="playerBar.songPlayer.setCurrentVolume(value)"></seek-bar>
          </div>
      </div>
  </section>

@@ -11,16 +11,16 @@
 
       var currentBuzzObject = null;
 
-      /**
-      * @function playSong
-      * @desc Plays currently playing song and loads new audio file as currentBuzzObject
-      * @param {Object} song
-      */
+/**
+* @function playSong
+* @desc Plays currently playing song and loads new audio file as currentBuzzObject
+* @param {Object} song
+*/
 
-              var playSong = function(song) {
-                currentBuzzObject.play();
-                SongPlayer.currentSong.playing = true;
-              }
+      var playSong = function(song) {
+        currentBuzzObject.play();
+          SongPlayer.currentSong.playing = true;
+        }
 
 
 /**
@@ -75,7 +75,7 @@
 
       SongPlayer.currentTime = null;
 
-      SongPlayer.volume = null;
+      SongPlayer.currentVolume = 100;
 
 /**
 *@function play
@@ -166,13 +166,16 @@
         SongPlayer.currentSong.playing = null;
       }
 
-        return SongPlayer;
 
-        SongPlayer.setVolume = function (volume) {
-          if (currentBuzzObject) {
-            currentBuzzObject.setVolume(volume);
-          }
-        };
+
+      SongPlayer.setCurrentVolume = function (volume) {
+        if (currentBuzzObject) {
+          currentBuzzObject.setVolume(volume);
+        }
+      };
+
+
+      return SongPlayer;
 
 };
 
